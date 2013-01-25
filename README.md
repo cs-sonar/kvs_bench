@@ -52,6 +52,19 @@ $ vi /path/to/php.ini
 extension=memcached.so
 ```
 
+###SQLite(備考)
+以下のように作成しています。
+
+```sh
+$ sqlite3 bench.db
+sqlite >CREATE TABLE `demo` (
+...> `key` varchar(8) NOT NULL,
+...> `value` varchar(5) NOT NULL,
+...> PRIMARY KEY (`key`)
+...> );
+
+```
+
 ## 実行
 一気に実行
 ```sh
