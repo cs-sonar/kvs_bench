@@ -20,7 +20,7 @@ for ($i = 1; $i <= 10000; $i++) {
 $time_end = microtime(true);
 
 //バルス
-exec('redis-cli FLUSHALL');
+$r->flushall();
 
 // 時間
 include('./inc/printTime.php');
