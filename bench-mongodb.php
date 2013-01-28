@@ -18,12 +18,11 @@ $time_set = microtime(true);
 // 取得
 for ($i = 1; $i <= LOOP_NUM; $i++) {
 	$res = $col->findOne(array('key' => 'key'.rand(1, 10000).''));
-	var_dump($res);
 }
 $time_end = microtime(true);
 
 // お掃除
-// $db->drop();
+$db->drop();
 
 // 時間
 include('./inc/printTime.php');

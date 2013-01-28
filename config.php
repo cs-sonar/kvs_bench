@@ -5,7 +5,7 @@
  */
 
 define("SERVER", "localhost");
-define("LOOP_NUM", 1000);
+define("LOOP_NUM", 10000);
 
 /*
  * memcache setting

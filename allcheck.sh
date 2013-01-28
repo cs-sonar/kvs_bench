@@ -15,7 +15,7 @@ php bench-redis_phpredis_pipeline.php
 echo "------------------- redis(predis) -------------------";
 php bench-redis_predis.php
 echo "------------------- sqlite(pdo) -------------------";
-#php bench-sqlite_pdo.php
+php bench-sqlite_pdo.php
 echo "------------------- sqlite(pdo,transaction) -------------------";
 php bench-sqlite_pdo_transaction.php
 echo "------------------- mongodb -------------------";
