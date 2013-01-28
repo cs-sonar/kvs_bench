@@ -1,29 +1,29 @@
 <?php
 include("config.php");
+
 $time_start = microtime( true );
 
 // 接続
-$m = new memcached();
-$m->addServer('localhost', MEMCACHE_PORT);
+$mongo = new Mongo();
+$db = $mongo->selectDB("bench");
+$col = $db->createCollection("demo");
+$col = $db->selectCollection("demo");
 
 // セット
 for ($i = 1; $i <= LOOP_NUM; $i++) {
-	$m->set("key".$i, $i);
+	$col->insert(array("key" => "key".$i , "value" => $i));
 }
 $time_set = microtime(true);
 
-// セット数の検証
-// $items = $m->getStats();
-// echo validate_setnum();
-
 // 取得
 for ($i = 1; $i <= LOOP_NUM; $i++) {
-	$m->get("key".rand(1, LOOP_NUM)) . "\n";
+	$res = $col->findOne(array('key' => 'key'.rand(1, 10000).''));
+	var_dump($res);
 }
 $time_end = microtime(true);
 
 // お掃除
-$m->flush();
+// $db->drop();
 
 // 時間
 include('./inc/printTime.php');

@@ -7,16 +7,22 @@ $db = new PDO('mysql:host='.SERVER.';dbname='.MYSQL_DB.';', MYSQL_USER, MYSQL_PA
 
 // 10000のkeyをセット
 $db->beginTransaction();
-for ($i = 1; $i <= 10000; $i++) {
+for ($i = 1; $i <= LOOP_NUM; $i++) {
 	$stmt = $db->prepare("INSERT INTO `demo` (`key`, `value`) VALUES ('key".$i."', '".$i."')");
-	//$stmt->execute();
+	$stmt->execute();
 }
 $db->commit();
 $time_set = microtime(true);
 
-// ランダムに10000個の値を取得
-for ($i = 1; $i <= 10000; $i++) {
-        $stmt = $db->prepare("SELECT `key` FROM `demo` WHERE `key` = 'key" .rand(1, 10000)."'");
+// セット数の検証
+$stmt = $db->prepare("SELECT count(`key`) FROM `demo`");
+$stmt->execute();
+$row = $stmt->fetchColumn();
+echo validate_setnum($row);
+
+// ランダムに値を取得
+for ($i = 1; $i <= LOOP_NUM; $i++) {
+        $stmt = $db->prepare("SELECT `key` FROM `demo` WHERE `key` = 'key" .rand(1, LOOP_NUM)."'");
         $stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 }

@@ -5,6 +5,7 @@
  */
 
 define("SERVER", "localhost");
+define("LOOP_NUM", 1000);
 
 /*
  * memcache setting
@@ -32,3 +33,16 @@ define("REDIS_PORT", "6379");
  */
 
 define("SQLITE_DB", "bench.db");
+
+/*
+ * function
+ */
+
+function validate_setnum($row)
+{
+    if($row != LOOP_NUM){
+        return "set error. This program try set ".LOOP_NUM." keys. But " .$row. " of keys in DB. \n";
+    }else{
+        return "set done. (".$row." keys) \n";
+    }
+}
